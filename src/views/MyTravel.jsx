@@ -33,7 +33,7 @@ function MyTravel() {
       //   }
       // })
 
-      const resData = await axios.get(`https://travel-service-server-by-prisma-d8tx.vercel.app/travel/${traveller.travellerId}`)
+      const resData = await axios.get(`https://travel-service-server-by-prisma-dome-klayudoms-projects.vercel.app/travel/${traveller.travellerId}`)
 
       if (resData.status == 200) {
         // const data = await resData.json()
@@ -54,7 +54,7 @@ function MyTravel() {
       //   }
       // })
 
-      const response  = await axios.delete(`https://travel-service-server-by-prisma-d8tx.vercel.app/travel/${travelId}`)
+      const response  = await axios.delete(`https://travel-service-server-by-prisma-dome-klayudoms-projects.vercel.app/travel/${travelId}`)
 
       if(response.status === 200){
         alert('ลบข้อมูลเรียบร้อยแล้ว')

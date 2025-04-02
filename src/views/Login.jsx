@@ -38,7 +38,7 @@ function Login() {
       //   method: 'GET'
       // })
 
-      const response = await axios.get(`https://travel-service-server-by-prisma-d8tx.vercel.app/traveller/${travellerEmail}/${travellerPassword}`)
+      const response = await axios.get(`https://travel-service-server-by-prisma-dome-klayudoms-projects.vercel.app/traveller/${travellerEmail}/${travellerPassword}`)
 
       if (response.status == 200) {
         // window.location.href('/mytravel')

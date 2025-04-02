@@ -87,7 +87,7 @@ function AddMyTravel() {
         //   body: formData,
         // })
 
-        const response = await axios.post('https://travel-service-server-by-prisma-d8tx.vercel.app/travel/', formData,{
+        const response = await axios.post('https://travel-service-server-by-prisma-dome-klayudoms-projects.vercel.app/travel/', formData,{
           headers: {
             'Content-Type': 'multipart/form-data'
           }

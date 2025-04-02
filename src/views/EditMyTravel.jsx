@@ -44,7 +44,7 @@ function EditMyTravel() {
       //   }
       // })
 
-      const resData = await axios.get(`https://travel-service-server-by-prisma-d8tx.vercel.app/travel/one/${travelId}`)
+      const resData = await axios.get(`https://travel-service-server-by-prisma-dome-klayudoms-projects.vercel.app/travel/one/${travelId}`)
 
       // const data = await resData.json()
       // setTravelPlace(data["data"].travelPlace)
@@ -115,7 +115,7 @@ function EditMyTravel() {
         //   body: formData,
         // })
 
-        const response = await axios.put(`https://travel-service-server-by-prisma-d8tx.vercel.app/travel/${travelId}`, formData, {
+        const response = await axios.put(`https://travel-service-server-by-prisma-dome-klayudoms-projects.vercel.app/travel/${travelId}`, formData, {
           headers: {
             'Content-Type': 'multipart/form-data'
           }
