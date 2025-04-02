@@ -1,10 +1,10 @@
 import { Box, AppBar, Toolbar, IconButton, Typography, Button, Avatar } from '@mui/material'
 import { Table, TableCell, TableContainer, TableHead, TableRow, Paper, TableBody } from '@mui/material'
 import FlightTakeoffIcon from '@mui/icons-material/FlightTakeoff';
-import { useEffect, useState } from 'react';
+import { useEffect, useState, } from 'react';
 import Profile from './../assets/profile.png'
 import Place from './../assets/place.png'
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 import axios from 'axios'
 
 import React from 'react'
@@ -13,6 +13,8 @@ function MyTravel() {
   const [travellerFullname, setTravellerFullname] = useState('')
   const [travellerImage, setTravellerImage] = useState('')
   const [travel, setTravel] = useState([])
+
+  const navigator = useNavigate()
 
   useEffect(() => {
     //เอาข้อมูลใน memory มาแสดงที่ AppBar
@@ -56,7 +58,7 @@ function MyTravel() {
 
       if(response.status === 200){
         alert('ลบข้อมูลเรียบร้อยแล้ว')
-        window.location.reload()
+        navigator('/mytravel')
       }else{
         alert('ลบข้อมูลไม่สำเร็จ กรุณาลองใหม่')
       }
