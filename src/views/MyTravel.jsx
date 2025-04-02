@@ -9,7 +9,7 @@ import axios from 'axios'
 
 import React from 'react'
 
-const [refresh, setRefresh] = useState(false);
+
 
 function MyTravel() {
   const [travellerFullname, setTravellerFullname] = useState('')
@@ -42,25 +42,32 @@ function MyTravel() {
         // setTravel(data["data"])
         setTravel(resData.data["data"])
       }
-      fetchData();
     }
     getAllTravel()
-  }, [refresh])
+  }, [])
 
   //ฟังก์ชันลบ
   const handleDeleteTravelClick = async (travelId) => {
     try {
-      const response = await fetch('API_URL', { method: 'DELETE' });
+      // const response  = await fetch(`http://localhost:4000/travel/${travelId}`,{
+      //   method: 'DELETE',
+      //   headers: {
+      //     'Content-Type': 'application/json'
+      //   }
+      // })
+
+      const response = await axios.delete(`https://travel-service-server-by-prisma-dome-klayudoms-projects.vercel.app/travel/${travelId}`)
+
       if (response.status === 200) {
-        alert('ลบข้อมูลเรียบร้อยแล้ว');
-        setRefresh(prev => !prev);  // สลับค่าเพื่อให้ useEffect ทำงาน
+        alert('ลบข้อมูลเรียบร้อยแล้ว')
+
+        navigator(0);
       } else {
-        alert('ลบข้อมูลไม่สำเร็จ กรุณาลองใหม่');
+        alert('ลบข้อมูลไม่สำเร็จ กรุณาลองใหม่')
       }
     } catch (error) {
-      alert('พบข้อผิดพลาดในการทำงาน: ' + error);
+      alert('พบข้อผิดพลาดในการทำงาน: ', error)
     }
-  
   }
 
   return (
