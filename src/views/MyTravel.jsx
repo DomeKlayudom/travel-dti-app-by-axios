@@ -9,6 +9,8 @@ import axios from 'axios'
 
 import React from 'react'
 
+const [refresh, setRefresh] = useState(false);
+
 function MyTravel() {
   const [travellerFullname, setTravellerFullname] = useState('')
   const [travellerImage, setTravellerImage] = useState('')
@@ -40,31 +42,25 @@ function MyTravel() {
         // setTravel(data["data"])
         setTravel(resData.data["data"])
       }
+      fetchData();
     }
     getAllTravel()
-  }, [])
+  }, [refresh])
 
   //ฟังก์ชันลบ
-  const handleDeleteTravelClick = async (travelId)=>{
-    try{
-      // const response  = await fetch(`http://localhost:4000/travel/${travelId}`,{
-      //   method: 'DELETE',
-      //   headers: {
-      //     'Content-Type': 'application/json'
-      //   }
-      // })
-
-      const response  = await axios.delete(`https://travel-service-server-by-prisma-dome-klayudoms-projects.vercel.app/travel/${travelId}`)
-
-      if(response.status === 200){
-        alert('ลบข้อมูลเรียบร้อยแล้ว')
-        navigator('/mytravel')
-      }else{
-        alert('ลบข้อมูลไม่สำเร็จ กรุณาลองใหม่')
+  const handleDeleteTravelClick = async (travelId) => {
+    try {
+      const response = await fetch('API_URL', { method: 'DELETE' });
+      if (response.status === 200) {
+        alert('ลบข้อมูลเรียบร้อยแล้ว');
+        setRefresh(prev => !prev);  // สลับค่าเพื่อให้ useEffect ทำงาน
+      } else {
+        alert('ลบข้อมูลไม่สำเร็จ กรุณาลองใหม่');
       }
-    }catch(error){
-      alert('พบข้อผิดพลาดในการทำงาน: ', error)
+    } catch (error) {
+      alert('พบข้อผิดพลาดในการทำงาน: ' + error);
     }
+  
   }
 
   return (
@@ -120,17 +116,18 @@ function MyTravel() {
               <TableBody>
                 {travel.map((row, index) => (
                   <TableRow
-                    key={index}                    
-                    sx={{ '&:last-child td, &:last-child th': { border: 0 },
-                        backgroundColor: index % 2 == 0 ? 'white' : 'pink'
+                    key={index}
+                    sx={{
+                      '&:last-child td, &:last-child th': { border: 0 },
+                      backgroundColor: index % 2 == 0 ? 'white' : 'pink'
                     }}
                   >
                     <TableCell align="center">{index + 1}</TableCell>
                     <TableCell align="left">{row.travelPlace}</TableCell>
                     <TableCell align="center">
                       <Avatar src={row.travelImage == '' ? Place : `${row.travelImage}`}
-                              sx={{width: 60, height: 60, boxShadow:3}}
-                              variant='rounded'
+                        sx={{ width: 60, height: 60, boxShadow: 3 }}
+                        variant='rounded'
                       />
                     </TableCell>
                     <TableCell align="left">{row.travelStartDate}</TableCell>
@@ -138,7 +135,7 @@ function MyTravel() {
                     <TableCell align="right">{row.travelCostTotal}</TableCell>
                     <TableCell align="center">
                       <Button component={Link} to={`/editmytravel/${row.travelId}`}>แก้ไข</Button>
-                      <Button onClick={()=>handleDeleteTravelClick(row.travelId)}>ลบ</Button>
+                      <Button onClick={() => handleDeleteTravelClick(row.travelId)}>ลบ</Button>
                     </TableCell>
                   </TableRow>
                 ))}
