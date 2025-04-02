@@ -99,8 +99,7 @@ function EditProfile() {
           localStorage.clear()
           
           // const data = await response.json()
-          localStorage.setItem('traveller', JSON.stringify(data["data"]))
-
+          localStorage.setItem('traveller', JSON.stringify(response.data["data"]));
           navigator('/mytravel')
         }else{
           alert('แก้ไขข้อมูลผู้ใช้ไม่สำเร็จ กรุณาลองใหม่อีกครั้ง')
